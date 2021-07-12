@@ -1,0 +1,6 @@
+flask                     
+flask-bootstrap           
+flask-login            
+flask-wtf
+pymongo
+wtforms
