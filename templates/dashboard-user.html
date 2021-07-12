@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} CRS | Dashboard {% endblock %}
+{% block content %}
+<nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color:white;min-height: 95px;">
+    <a class="navbar-brand" style="color:white;margin-left: 25px;" href="#">
+        <img src="{{url_for('static', filename='logo.png')}}" height="43" class="d-inline-block align-items-center" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-right: 1em">
+    </div>
+</nav>
+
+<div>
+    <h3>Hello! {% if user_code.startswith('G') %} Golden User {% endif %} {{ user_code }}!</h3>
+</div>
+
+<div>
+
+    {% if renting_type=='' %}
+        You never rent a car. Please Try a car! <a class="btn btn-primary" href="{{url_for('car_list')}}" role="button">Go for one!</a>
+    {% elif renting_type == 'Reserved' %}
+        You have reserved a car {{ car_code }}. Please active your car using the pincode {{ pin_code }} <a class="btn btn-primary" href="{{ url_for('start_car', car_id=car_code) }}" role="button">Start it</a>.
+    {% elif renting_type== 'Using' %}
+        You are using the car for this length. It costs you {{ cost }} so far. <a class="btn btn-primary" href="#" role="button">Return it</a>
+    {% elif renting_type=='Paid' %}
+        You rented a car recently. Do you like it? <a class="btn btn-primary" href="#" role="button">Once More!</a>
+    {% endif %}
+</div>
+
+
+{% endblock %}

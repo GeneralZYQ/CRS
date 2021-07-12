@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} CRS | Dashboard {% endblock %}
+{% block content %}
+<nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color:white;min-height: 95px;">
+    <a class="navbar-brand" style="color:white;margin-left: 25px;" href="#">
+        <img src="{{url_for('static', filename='logo.png')}}" height="43" class="d-inline-block align-items-center" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-right: 1em">
+    </div>
+</nav>
+
+<div>
+    <h3>Hello! {% if user_code.startswith('G') %} Golden User {% endif %} {{ user_code }}! Pick the one that you like!</h3>
+</div>
+
+<div class="container py-5 position-relative">
+
+<div>
+    <table class="table">
+
+        <thead>
+          <th>Car Code</th>
+          <th>Car Type</th>
+          <th>Description</th>
+          <th>Price </th>
+          <th>Pledge </th>
+        </thead>
+
+        {% for car in cars %}
+
+              <tr>
+                <td>{{ car.car_code }}</td>
+                <td>{{ car.car_subtype }}</td>
+                <td>{{ car.description }}</td>
+                <td>{{ car.price }}/h </td>
+                <td>{{ car.pledge }}</td>
+                <td>{% if car.available == 'Yes' %} <a class="btn btn-primary" href="{{ url_for('order_car',car_id = car.car_code)}}" role="button">Order!</a>  {% else %} <a class="btn btn-primary" href="#" enable=false role="button">Not Availabe</a> {% endif %}</td>
+              </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</div>
+
+
+{% endblock %}

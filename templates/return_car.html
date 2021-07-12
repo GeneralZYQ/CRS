@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} CRS | Login {% endblock %}
+{% block content %}
+<nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color:white;min-height: 95px;">
+    <a class="navbar-brand" style="color:white;margin-left: 25px;" href="#">
+        <img src="{{url_for('static', filename='logo.png')}}" height="43" class="d-inline-block align-items-center" alt="">
+        OneApp
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-right: 1em">
+    </div>
+</nav>
+
+<div class="card card-shadow mx-auto bg-white" style="width: 20rem; margin-top: 4em;margin-bottom: 4em; ">
+    <div class="card-body">
+
+
+        <div class="card-title align-items-center" style="padding:0px 16px;">
+            <h2 class="mdl-card__title-text" style="text-align: center;">Renting Successfully!</h2>
+        </div>
+        <br>
+        <div>
+            Your car is started!
+        </div>
+        
+
+    </div>
+</div>
+
+
+{% endblock %}

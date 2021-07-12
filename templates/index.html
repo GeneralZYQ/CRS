@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome to the Car Rental System {% endblock %}</h1>
+    <h3>Are you already a customer?</h3>
+    <div class="row justify-content-left">
+           <a class="btn btn-primary" href="{{ url_for('login_customer') }}" role="button">Login Now!</a>
+    </div>
+{% endblock %}

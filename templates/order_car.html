@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} CRS | Login {% endblock %}
+{% block content %}
+<nav class="navbar sticky-top navbar-expand-md navbar-light" style="background-color:white;min-height: 95px;">
+    <a class="navbar-brand" style="color:white;margin-left: 25px;" href="#">
+        <img src="{{url_for('static', filename='logo.png')}}" height="43" class="d-inline-block align-items-center" alt="">
+        OneApp
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-right: 1em">
+    </div>
+</nav>
+
+<div class="card card-shadow mx-auto bg-white" style="width: 20rem; margin-top: 4em;margin-bottom: 4em; ">
+    <div class="card-body">
+
+
+        <div class="card-title align-items-center" style="padding:0px 16px;">
+            <h2 class="mdl-card__title-text" style="text-align: center;">Login as an applicant</h2>
+        </div>
+        <br>
+        <div>
+            How many hours do you would like to rent?<input type="text" placeholder="Number of hours" id="hours"/>
+        </div>
+        <br>
+        <div>
+            Estimated Price: <p id="estimited_price"></p>
+        </div>
+        <br>
+        <div>
+            What the cash combination would you like to pay?
+        </div>
+        <div class="card-text" style="padding-top:0px;padding-bottom:0px;width:95%;">
+            <form id="cashForm" method="POST" action="{{ url_for('order_car', car_id=car_code) }}">
+                
+                {{ form.hidden_tag() }}
+                {{ wtf.form_field(form.hoursToRent) }}
+                {{ wtf.form_field(form.fiftyCounts) }}
+                {{ wtf.form_field(form.twentyCounts) }}
+                {{ wtf.form_field(form.tenCounts) }}
+                {{ wtf.form_field(form.fiveCounts) }}
+                {{ wtf.form_field(form.twoCounts) }}
+                {{ wtf.form_field(form.oneCounts) }}
+                {{ wtf.form_field(form.fiftycentsCounts) }}
+                {{ wtf.form_field(form.twentycentsCounts) }}
+                
+                <br>
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-primary float-right btn-lg">Order</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        let price = '{{ price }}'; 
+        let pledge = '{{ pledge }}';
+        const price_label = document.getElementById('estimited_price');
+        // alert(name); 
+
+        hours.oninput = function() {
+
+            var es_hours = parseInt(hours.value);
+            if (parseInt(hours.value) < 4){
+                es_hours = 4
+            }
+            var es_price = es_hours * parseFloat(price) + parseInt(pledge)
+            price_label.textContent = es_price.toString()
+            // alert(es_price.toString())
+        };
+
+
+    })
+</script>
+
+{% endblock %}
