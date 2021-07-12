@@ -20,23 +20,20 @@
 
 
         <div class="card-title align-items-center" style="padding:0px 16px;">
-            <h2 class="mdl-card__title-text" style="text-align: center;">Please fill in the neccessary information.</h2>
+            <h2 class="mdl-card__title-text" style="text-align: center;">Money returning.</h2>
         </div>
         <br>
         <div>
-            <div class="card-text" style="padding-top:0px;padding-bottom:0px;width:95%;">
-            <form id="cashForm" method="POST" action="{{ url_for('return_car', car_id=car_code) }}">
-                
-                {{ form.hidden_tag() }}
-                {{ wtf.form_field(form.hoursRented) }}
-                {{ wtf.form_field(form.returnPlace) }}
-                
-                <br>
-                <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-primary float-right btn-lg">Return</button>
+            We paid you back:
+            {% for x in back %}
+                <div>
+                    {{ x }}
                 </div>
-              </form>
+            {% endfor %}
         </div>
+
+        <div>
+            <a class="btn btn-primary" href="{{ url_for('user_dashboard')}}" role="button">Go back to dashboard!</a>
         </div>
         
 

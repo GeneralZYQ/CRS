@@ -20,26 +20,37 @@
 
 
         <div class="card-title align-items-center" style="padding:0px 16px;">
-            <h2 class="mdl-card__title-text" style="text-align: center;">Please fill in the neccessary information.</h2>
+            <h2 class="mdl-card__title-text" style="text-align: center;">Login as an applicant</h2>
         </div>
         <br>
         <div>
-            <div class="card-text" style="padding-top:0px;padding-bottom:0px;width:95%;">
-            <form id="cashForm" method="POST" action="{{ url_for('return_car', car_id=car_code) }}">
+            {{ message }}
+        </div>
+        <br>
+        <br>
+        <div>
+            What the cash combination would you like to pay?
+        </div>
+        <div class="card-text" style="padding-top:0px;padding-bottom:0px;width:95%;">
+            <form id="cashForm" method="POST" action="{{ url_for('checkout_car') }}">
                 
                 {{ form.hidden_tag() }}
-                {{ wtf.form_field(form.hoursRented) }}
-                {{ wtf.form_field(form.returnPlace) }}
+
+                {{ wtf.form_field(form.fiftyCounts) }}
+                {{ wtf.form_field(form.twentyCounts) }}
+                {{ wtf.form_field(form.tenCounts) }}
+                {{ wtf.form_field(form.fiveCounts) }}
+                {{ wtf.form_field(form.twoCounts) }}
+                {{ wtf.form_field(form.oneCounts) }}
+                {{ wtf.form_field(form.fiftycentsCounts) }}
+                {{ wtf.form_field(form.twentycentsCounts) }}
                 
                 <br>
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-primary float-right btn-lg">Return</button>
+                    <button type="submit" class="btn btn-primary float-right btn-lg">Order</button>
                 </div>
               </form>
         </div>
-        </div>
-        
-
     </div>
 </div>
 

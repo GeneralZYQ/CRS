@@ -25,9 +25,11 @@
     {% elif renting_type == 'Reserved' %}
         You have reserved a car {{ car_code }}. Please active your car using the pincode {{ pin_code }} <a class="btn btn-primary" href="{{ url_for('start_car', car_id=car_code) }}" role="button">Start it</a>.
     {% elif renting_type== 'Using' %}
-        You are using the car for this length. It costs you {{ cost }} so far. <a class="btn btn-primary" href="#" role="button">Return it</a>
-    {% elif renting_type=='Paid' %}
-        You rented a car recently. Do you like it? <a class="btn btn-primary" href="#" role="button">Once More!</a>
+        You are using the car for this length. It costs you {{ cost }} so far. <a class="btn btn-primary" href="{{ url_for('return_car', car_id=car_code) }}" role="button">Return it</a>
+    {% elif renting_type=='Returned' %}
+        You rented a car recently. Do you like it? <a class="btn btn-primary" href="{{url_for('car_list')}}" role="button">Once More!</a>
+    {% elif renting_type=='Checking' %}
+        You have a car needs to be checked out. <a class="btn btn-primary" href="{{ url_for('checkout_car') }}" role="button">Go to Check!</a>
     {% endif %}
 </div>
 
