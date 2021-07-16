@@ -229,6 +229,7 @@ def return_car(car_id):
 
 				delta = paid_cost - total_cost
 				if delta >= 0:
+					print(delta)
 					print('we return money')
 					connectToDB.db.vehicle_customer.update_one({"car_code": car_id, "user_code": current_user.id}, {"$set": {"status": "Returned", "returned_date": returned_date, "cost": total_cost, "back_location": place_to_return}})
 					connectToDB.db.vehicles.update_one({"car_code": car_id}, {"$set": {"location": place_to_return}})
@@ -298,6 +299,8 @@ def checkout_car():
 @login_required
 def start_car(car_id):
 
+	print(car_id)
+
 	connectToDB.connect_to_db()
 	connectToDB.db.vehicle_customer.update_one({"car_code": car_id, "user_code": current_user.id}, {"$set": {"status": "Using"}})
 
@@ -352,11 +355,11 @@ def order_car(car_id):
 			fiftycentsCounts = orderForm.fiftycentsCounts.data if orderForm.fiftycentsCounts.data is not None else 0
 			twentycentsCounts = orderForm.twentycentsCounts.data if orderForm.twentycentsCounts.data is not None else 0
 
-			given_price = fiftycentsCounts * 50.0 + twentyCounts * 20.0 + tenCounts * 10.0 + fiveCounts * 5.0 + twoCounts * 2.0 + oneCounts*1.0 + fiftycentsCounts * 0.5 + twentycentsCounts * 0.2
+			given_price = fiftyCounts * 50.0 + twentyCounts * 20.0 + tenCounts * 10.0 + fiveCounts * 5.0 + twoCounts * 2.0 + oneCounts*1.0 + fiftycentsCounts * 0.5 + twentycentsCounts * 0.2
 
-			delta = given_price - total_price
-			print(given_price)
-			print(delta)
+			delta = given_price - total_price 
+			print("give money :%f" % given_price)
+			print("delta: %f" % delta)
 			cash_back = []
 			if delta < 0:
 				render_template('order_car.html', price=price, form=orderForm, car_code=car_id, pledge=pledge, message='The money is not enough')
@@ -412,7 +415,7 @@ def order_car(car_id):
 				'start_location' : car_location, 'back_location' : '', 'returned_date': 0, 'cost' : total_price, 'price_per_hour': price
 				})
 
-			return render_template('reserved_car.html', pin_code=pin_code, location=car_location, car_id=car_id)
+			return render_template('reserved_car.html', pin_code=pin_code, location=car_location, car_id=car_id, cash_back=cash_back)
 		else:
 			render_template('order_car.html', price=price, form=orderForm, car_code=car_id, pledge=pledge, message = '')
 
@@ -420,6 +423,11 @@ def order_car(car_id):
 		return price
 
 
+@app.route("/logout/")
+@login_required
+def logout():
 
+	logout_user()
+	return redirect(url_for('login_customer'))
 
 

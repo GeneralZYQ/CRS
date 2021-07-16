@@ -28,6 +28,14 @@
         </div>
 
         <div>
+            We give the money back to you:
+
+            {% for x in cash_back %}
+               <p>{{ x }}</p>
+            {% endfor %}
+        </div>
+
+        <div>
             <a class="btn btn-primary" href="{{ url_for('start_car',car_id = car_id)}}" role="button">Start your car!</a>
         </div>
 
